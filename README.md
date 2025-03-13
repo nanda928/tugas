@@ -42,5 +42,5 @@ Jalankan dashboard Streamlit dengan perintah berikut:
 Aplikasi akan terbuka di browser Anda.
 
 ## 👥 Kontributor
-Ananda Pradewa Dyah Kurniawan Putra - Pengembang Proyek
-Sumber Dataset - Bike Sharing Dataset
+- Ananda Pradewa Dyah Kurniawan Putra - Pengembang Proyek
+- Sumber Dataset - Bike Sharing Dataset
