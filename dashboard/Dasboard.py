@@ -6,7 +6,8 @@ import seaborn as sns
 from datetime import datetime
 
 # Load data
-all_data = pd.read_csv('dashboard/main_data.csv')
+day_df = pd.read_csv('data/day.csv')
+hour_df = pd.read_csv('data/hour.csv')
 
 # Judul Dashboard
 st.title('Analisis Data Peminjaman Sepeda')
@@ -22,7 +23,7 @@ def pola_penggunaan():
     
     # Pola penggunaan berdasarkan musim
     st.subheader('Pola Penggunaan Berdasarkan Musim')
-    seasonal_avg_day = all_data.groupby('season')['cnt'].mean()
+    seasonal_avg_day = day_df.groupby('season')['cnt'].mean()
     fig, ax = plt.subplots()
     seasonal_avg_day.plot(kind='bar', ax=ax)
     ax.set_ylabel('Rata-rata Peminjaman')
@@ -31,7 +32,7 @@ def pola_penggunaan():
     
     # Pola penggunaan berdasarkan bulan
     st.subheader('Pola Penggunaan Berdasarkan Bulan')
-    monthly_avg_day = all_data.groupby('mnth')['cnt'].mean()
+    monthly_avg_day = day_df.groupby('mnth')['cnt'].mean()
     fig, ax = plt.subplots()
     monthly_avg_day.plot(kind='bar', ax=ax)
     ax.set_ylabel('Rata-rata Peminjaman')
@@ -40,7 +41,7 @@ def pola_penggunaan():
     
     # Pola penggunaan berdasarkan jam
     st.subheader('Pola Penggunaan Berdasarkan Jam')
-    hourly_avg = all_data.groupby('hr')['cnt'].mean()
+    hourly_avg = hour_df.groupby('hr')['cnt'].mean()
     fig, ax = plt.subplots()
     hourly_avg.plot(kind='line', ax=ax)
     ax.set_ylabel('Rata-rata Peminjaman')
@@ -53,7 +54,7 @@ def pengaruh_cuaca():
     
     # Korelasi cuaca dengan jumlah peminjaman
     st.subheader('Korelasi Cuaca dengan Jumlah Peminjaman')
-    weather_avg_day = all_data.groupby('weathersit')['cnt'].mean()
+    weather_avg_day = day_df.groupby('weathersit')['cnt'].mean()
     fig, ax = plt.subplots()
     weather_avg_day.plot(kind='bar', ax=ax)
     ax.set_ylabel('Rata-rata Peminjaman')
@@ -63,7 +64,7 @@ def pengaruh_cuaca():
     # Scatter plot suhu vs jumlah peminjaman
     st.subheader('Scatter Plot Suhu vs Jumlah Peminjaman')
     fig, ax = plt.subplots()
-    sns.scatterplot(x='temp', y='cnt', data=all_data, ax=ax)
+    sns.scatterplot(x='temp', y='cnt', data=day_df, ax=ax)
     ax.set_ylabel('Jumlah Peminjaman')
     ax.set_xlabel('Suhu')
     st.pyplot(fig)
@@ -74,7 +75,7 @@ def tren_penggunaan():
     
     # Tren penggunaan sepeda per tahun
     st.subheader('Tren Penggunaan Sepeda per Tahun')
-    yearly_avg_day = all_data.groupby('yr')['cnt'].mean()
+    yearly_avg_day = day_df.groupby('yr')['cnt'].mean()
     fig, ax = plt.subplots()
     yearly_avg_day.plot(kind='line', ax=ax)
     ax.set_ylabel('Rata-rata Peminjaman')
@@ -83,7 +84,7 @@ def tren_penggunaan():
     
     # Tren penggunaan sepeda per bulan dalam setahun
     st.subheader('Tren Penggunaan Sepeda per Bulan dalam Setahun')
-    monthly_trend = all_data.groupby(['yr', 'mnth'])['cnt'].mean().unstack()
+    monthly_trend = day_df.groupby(['yr', 'mnth'])['cnt'].mean().unstack()
     fig, ax = plt.subplots(figsize=(12, 6))
     monthly_trend.plot(ax=ax)
     ax.set_ylabel('Rata-rata Peminjaman')
