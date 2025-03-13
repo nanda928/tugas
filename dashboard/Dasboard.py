@@ -6,7 +6,7 @@ import seaborn as sns
 from datetime import datetime
 
 # Load data
-all_data = pd.read_csv('main_data.csv')
+all_data = pd.read_csv('dashboard/main_data.csv')
 
 # Judul Dashboard
 st.title('Analisis Data Peminjaman Sepeda')
